@@ -1,0 +1,23 @@
+{
+    "name": "baijunyao/laravel-excel",
+    "description": "excel",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "baijunyao",
+            "email": "baijunyao@baijunyao.com"
+        }
+    ],
+    "require": {
+        "maatwebsite/excel": "2.1.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Baijunyao\\LaravelExcel\\": "src/"
+        },
+        "files": [
+            "src/helpers.php"
+        ]
+    }
+}
