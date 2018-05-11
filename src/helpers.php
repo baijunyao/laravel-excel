@@ -63,12 +63,25 @@ if (! function_exists('import_excel')) {
     /**
      * 导入excel文件
      *
-     * @param $file
-     * @return \Maatwebsite\Excel\LaravelExcelReader
+     * @param       $file
+     * @param array $replace  示例 [null => '']  则会把所有值为 null 的替换为'' 空字符串
+     *
+     * @return mixed
      */
-    function import_excel($file)
+    function import_excel($file, $replace = [])
     {
-        $excel = Excel::load($file);
+        $excel = Excel::load($file)->get();
+        if (!empty($replace)) {
+            $excel = $excel->map(function ($v) use ($replace) {
+                $search = array_keys($replace);
+                foreach ($v as $m => $n) {
+                    if (in_array($n, $search)) {
+                        $v[$m] = $replace[$n];
+                    }
+                }
+                return $v;
+            });
+        }
         return $excel;
     }
 }
